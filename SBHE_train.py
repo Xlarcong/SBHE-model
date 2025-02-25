@@ -16,7 +16,7 @@ gc.collect()
 
 class CNN(object):
 
-    def __init__(self, label_list, model_name=None):  #
+    def __init__(self, label_list, model_name=None):  
 
         self.labelencoder = LabelEncoder()
         self.labelencoder.fit(label_list)
@@ -135,7 +135,7 @@ class CNN(object):
                     val_lossT, val_lossL))
             gc.collect()
             if val_oa > best_OA:
-                torch.save(model.state_dict(), outModel)  # 返回模型的所有内容
+                torch.save(model.state_dict(), outModel)  
                 best_OA = val_oa
 
     def validation(self, model, validloader, criterion, Mseloss):
@@ -197,8 +197,8 @@ if __name__ == '__main__':
     modelname = 'SBHE'
 
     cnn = CNN(label_list=[0., 1.], model_name=modelname)
-    cnn.train(model_name=modelname, trainimg_fold=r'D:\三省一市整体数据\切片数据\哨兵二号', trainimg_fold2=r'D:\三省一市整体数据\切片数据\哨兵一号',
-              trainlabel_fold=r'D:\三省一市整体数据\切片数据\建筑物足迹', trainlabel_fold2=r'D:\三省一市整体数据\切片数据\建筑物高度',
+    cnn.train(model_name=modelname, trainimg_fold=r'D:\Sentinel-2', trainimg_fold2=r'D:\Sentinel-1',
+              trainlabel_fold=r'D:\Footprint', trainlabel_fold2=r'D:\Building_height',
               EPOCHS=1, batchsize=1, valid_rate=0.25, norm_val=255,
-              outModel=r'D:\pythondemo\EBH\deepdata\哨兵一二号双路训练\BIGDATA训练\{}_keras_十个城市_tryload.h5'.format
+              outModel=r'D:\{}_keras.h5'.format
               (modelname))
